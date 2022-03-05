@@ -7,7 +7,11 @@ import iconLeads from "../assets/svg/icon-leads-small.svg";
 export class TeamCard extends Component {
   render() {
     return (
-      <div className="card my-3">
+      <div
+        className={`card my-3 ${
+          this.props.is_archived ? "team-card archived" : ""
+        }`}
+      >
         <div className="card-body">
           {/* Card header */}
           <div class="d-flex align-items-center mb-3">
