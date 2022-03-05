@@ -1,6 +1,34 @@
 import React, { Component } from "react";
+import { fetchTeams } from "../../util/api";
+import TeamCard from "../TeamCard";
 
 export class Teams extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      teams: [],
+      isLoading: true,
+    };
+  }
+
+  async componentDidMount() {
+    const teams = await fetchTeams();
+    this.setState({
+      teams: teams,
+      isLoading: false,
+    });
+  }
+
+  teamList = () => {
+    return this.state.teams.map((team) => {
+      return (
+        <div className="col-lg-4 col-md-6 col-sm-12" key={team.id}>
+          <TeamCard {...team} />
+        </div>
+      );
+    });
+  };
+
   pageHeader = () => {
     return (
       <div className="bg-white pt-4 px-4 shadow-sm">
@@ -17,7 +45,12 @@ export class Teams extends Component {
   };
 
   render() {
-    return <div>{this.pageHeader()}</div>;
+    return (
+      <div>
+        {this.pageHeader()}
+        <div className="row">{this.teamList()}</div>
+      </div>
+    );
   }
 }
 
