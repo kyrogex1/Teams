@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import Teams from "./pages/Teams";
 import Sidebar from "./Sidebar";
 
 export class App extends Component {
@@ -9,6 +10,7 @@ export class App extends Component {
         <Sidebar />
         <div className="flex-grow-1 bg-light">
           <Header />
+          <Teams />
         </div>
       </div>
     );
