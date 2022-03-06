@@ -34,7 +34,7 @@ export class Teams extends Component {
       <div className="bg-white pt-4 px-4 shadow-sm">
         <div className="d-flex justify-content-between mb-3">
           <p>Teams</p>
-          <button className="btn btn-success"> CREATE NEW TEAM</button>
+          <button className="btn btn-light-green">&#43; CREATE NEW TEAM</button>
         </div>
         <div className="d-flex justify-content-between">
           <p>Tabs</p>
@@ -48,7 +48,9 @@ export class Teams extends Component {
     return (
       <div>
         {this.pageHeader()}
-        <div className="row">{this.teamList()}</div>
+        <div className="container">
+          <div className="row">{this.teamList()}</div>
+        </div>
       </div>
     );
   }

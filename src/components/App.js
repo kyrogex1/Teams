@@ -6,8 +6,10 @@ import Sidebar from "./Sidebar";
 export class App extends Component {
   render() {
     return (
-      <div className="d-flex" style={{ height: "100vh" }}>
-        <Sidebar />
+      <div className="d-flex">
+        <div style={{ height: "100vh" }} className="sticky-top">
+          <Sidebar />
+        </div>
         <div className="flex-grow-1 bg-light">
           <Header />
           <Teams />
