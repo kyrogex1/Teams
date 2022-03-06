@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ActivitiesContainer from "../ActivitiesContainer";
 import TeamsContainer from "../TeamsContainer";
 
 export class Teams extends Component {
@@ -21,7 +22,14 @@ export class Teams extends Component {
     return (
       <div>
         {this.pageHeader()}
-        <TeamsContainer />
+        <div className="row">
+          <div className="col-lg-9">
+            <TeamsContainer />
+          </div>
+          <div className="col-lg-3">
+            <ActivitiesContainer />
+          </div>
+        </div>
       </div>
     );
   }

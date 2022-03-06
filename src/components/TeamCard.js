@@ -28,7 +28,9 @@ export class TeamCard extends Component {
                 </p>
                 <p class="card-text">
                   <small class="text-muted">
-                    Created on {this.props.created_at}
+                    {this.props.created_at
+                      ? `Created on ${this.props.created_at}`
+                      : "\u00A0"}
                   </small>
                 </p>
               </div>
