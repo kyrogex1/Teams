@@ -5,7 +5,6 @@ function sleep(ms = 5000) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// TODO: Add Delays
 export const fetchTeams = async () => {
   let teams;
   ({ teams } = data);
