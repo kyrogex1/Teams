@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { fetchActivities } from "../util/api";
 
 const increaseQuotaText = ({ id, person, action, target, created_at }) => {
@@ -27,13 +29,31 @@ const archivedTeamText = ({ id, person, action, target, created_at }) => {
   );
 };
 
+const loadingPlaceHolder = (
+  <div className="mb-3">
+    <Skeleton count={5} />
+  </div>
+);
+
 const actionToTextFunctionMap = {
   increased_quota: increaseQuotaText,
   added_leads: addedLeadsText,
   archived_team: archivedTeamText,
 };
 
-const activityElement = (activity) => {
+const activityElement = (activity, isLoading) => {
+  // Loading placeholder
+  if (isLoading) {
+    return (
+      <div className="p-3">
+        <div class="d-flex">
+          <Skeleton circle inline={true} width={"2rem"} height={"2rem"} />
+          <Skeleton inline={true} containerClassName="ms-3 flex-grow-1" />
+        </div>
+        <Skeleton count={2} />
+      </div>
+    );
+  }
   return (
     <div className="d-flex align-items-start mb-3">
       <img
@@ -71,6 +91,19 @@ export class ActivitiesContainer extends Component {
     });
   };
 
+  activitiesList = () => {
+    let listToRender = [];
+    if (this.state.isLoading) {
+      listToRender = Array(4).fill(0);
+    } else {
+      listToRender = this.state.activities;
+    }
+
+    return listToRender.map((activity) =>
+      activityElement(activity, this.state.isLoading)
+    );
+  };
+
   render() {
     return (
       <div className="bg-white m-4 shadow">
@@ -78,9 +111,7 @@ export class ActivitiesContainer extends Component {
           <strong>Activities</strong>
         </div>
         <hr className="m-0" />
-        <div className="p-4">
-          {this.state.activities.map((activity) => activityElement(activity))}
-        </div>
+        <div className="p-4">{this.activitiesList()}</div>
       </div>
     );
   }
