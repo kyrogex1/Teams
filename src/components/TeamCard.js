@@ -4,6 +4,7 @@ import iconFavoriteInactive from "../assets/svg/icon-favorite-inactive.svg";
 import iconConversations from "../assets/svg/icon-conversations-small.svg";
 import iconLeads from "../assets/svg/icon-leads-small.svg";
 
+// TODO: Add Elipsis
 export class TeamCard extends Component {
   render() {
     return (
@@ -45,22 +46,21 @@ export class TeamCard extends Component {
 
           {/* Card Body */}
           <p className="card-text">{this.props.description}</p>
-
-          {/* Card Footer */}
-          <div className="card-footer bg-transparent">
-            <div className="d-flex">
-              <div className="me-2">
-                <img src={iconConversations} class="me-2" />
-                <small className="text-muted">
-                  {this.props?.campaigns_count.toLocaleString()} Campaigns
-                </small>
-              </div>
-              <div>
-                <img src={iconLeads} class="me-2" />
-                <small className="text-muted">
-                  {this.props?.leads_count.toLocaleString()} Leads
-                </small>
-              </div>
+        </div>
+        {/* Card Footer */}
+        <div className="card-footer bg-transparent py-3">
+          <div className="d-flex">
+            <div className="me-2">
+              <img src={iconConversations} class="me-2" />
+              <small className="text-muted">
+                {this.props?.campaigns_count.toLocaleString()} Campaigns
+              </small>
+            </div>
+            <div>
+              <img src={iconLeads} class="me-2" />
+              <small className="text-muted">
+                {this.props?.leads_count.toLocaleString()} Leads
+              </small>
             </div>
           </div>
         </div>

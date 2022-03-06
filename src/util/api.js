@@ -3,10 +3,16 @@ import data from "./data.json";
 // TODO: Add Delays
 export const fetchTeams = async () => {
   let teams;
-  const x = data;
   ({ teams } = data);
 
   return teams;
+};
+
+export const fetchTotalNumberTeams = async () => {
+  let teams;
+  ({ teams } = data);
+
+  return teams.length;
 };
 
 export const fetchCurrentUser = async (
