@@ -22,12 +22,14 @@ export class Teams extends Component {
     return (
       <div>
         {this.pageHeader()}
-        <div className="row">
-          <div className="col-lg-9">
-            <TeamsContainer />
-          </div>
-          <div className="col-lg-3">
-            <ActivitiesContainer />
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-9">
+              <TeamsContainer />
+            </div>
+            <div className="col-lg-3">
+              <ActivitiesContainer />
+            </div>
           </div>
         </div>
       </div>
