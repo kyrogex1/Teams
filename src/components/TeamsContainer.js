@@ -29,6 +29,7 @@ export class TeamsContainer extends Component {
       isLoading: true,
     });
 
+    const cacheFetchFuntion = this.props.fetchFunction;
     const teamsPromise = this.props.fetchFunction();
     const numberOfTeamsPromise = fetchTotalNumberTeams();
     const [teams, numberOfTeams] = await Promise.all([
@@ -36,11 +37,16 @@ export class TeamsContainer extends Component {
       numberOfTeamsPromise,
     ]);
 
-    this.setState({
-      numberOfTeams: numberOfTeams,
-      teamsToDisplay: teams,
-      isLoading: false,
-    });
+    // Guard to prevent bug when user switches between tabs
+    // rapidly. Only show results when current fetchFunction
+    // is the same as the one used to fetch results.
+    if (cacheFetchFuntion === this.props.fetchFunction) {
+      this.setState({
+        numberOfTeams: numberOfTeams,
+        teamsToDisplay: teams,
+        isLoading: false,
+      });
+    }
   };
 
   teamList = () => {
