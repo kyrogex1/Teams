@@ -29,11 +29,17 @@ const archivedTeamText = ({ id, person, action, target, created_at }) => {
   );
 };
 
-const loadingPlaceHolder = (
-  <div className="mb-3">
-    <Skeleton count={5} />
-  </div>
-);
+const loadingPlaceHolder = (key) => {
+  return (
+    <div className="p-3" key={key}>
+      <div className="d-flex">
+        <Skeleton circle inline={true} width={"2rem"} height={"2rem"} />
+        <Skeleton inline={true} containerClassName="ms-3 flex-grow-1" />
+      </div>
+      <Skeleton count={2} />
+    </div>
+  );
+};
 
 const actionToTextFunctionMap = {
   increased_quota: increaseQuotaText,
@@ -41,21 +47,13 @@ const actionToTextFunctionMap = {
   archived_team: archivedTeamText,
 };
 
-const activityElement = (activity, isLoading) => {
+const activityElement = (activity, isLoading, key) => {
   // Loading placeholder
   if (isLoading) {
-    return (
-      <div className="p-3">
-        <div class="d-flex">
-          <Skeleton circle inline={true} width={"2rem"} height={"2rem"} />
-          <Skeleton inline={true} containerClassName="ms-3 flex-grow-1" />
-        </div>
-        <Skeleton count={2} />
-      </div>
-    );
+    return loadingPlaceHolder(key);
   }
   return (
-    <div className="d-flex align-items-start mb-3">
+    <div className="d-flex align-items-start mb-3" key={key}>
       <img
         src={activity.person.avatar}
         style={{ height: "3rem" }}
@@ -99,8 +97,8 @@ export class ActivitiesContainer extends Component {
       listToRender = this.state.activities;
     }
 
-    return listToRender.map((activity) =>
-      activityElement(activity, this.state.isLoading)
+    return listToRender.map((activity, index) =>
+      activityElement(activity, this.state.isLoading, index)
     );
   };
 

@@ -26,7 +26,7 @@ export class TeamCard extends Component {
       >
         <div className="card-body">
           {/* Card header */}
-          <div class="d-flex align-items-center mb-3">
+          <div className="d-flex align-items-center mb-3">
             <img
               className="rounded me-3"
               height="45px"
@@ -34,11 +34,11 @@ export class TeamCard extends Component {
             />
             <div className="d-flex justify-content-between align-items-start flex-grow-1">
               <div>
-                <p class="card-text mb-0">
+                <p className="card-text mb-0">
                   <strong>{this.props.name}</strong>
                 </p>
-                <p class="card-text">
-                  <small class="text-muted">
+                <p className="card-text">
+                  <small className="text-muted">
                     {this.props.created_at
                       ? `Created on ${this.props.created_at}`
                       : "\u00A0"}
@@ -64,13 +64,13 @@ export class TeamCard extends Component {
         <div className="card-footer bg-transparent py-3">
           <div className="d-flex">
             <div className="me-2">
-              <img src={iconConversations} class="me-2" />
+              <img src={iconConversations} className="me-2" />
               <small className="text-muted">
                 {this.props?.campaigns_count?.toLocaleString()} Campaigns
               </small>
             </div>
             <div>
-              <img src={iconLeads} class="me-2" />
+              <img src={iconLeads} className="me-2" />
               <small className="text-muted">
                 {this.props?.leads_count?.toLocaleString()} Leads
               </small>

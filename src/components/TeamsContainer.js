@@ -14,8 +14,22 @@ export class TeamsContainer extends Component {
     };
   }
 
-  async componentDidMount() {
-    const teamsPromise = fetchTeams();
+  componentDidMount = () => {
+    this.fetchData();
+  };
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.fetchFunction !== this.props.fetchFunction) {
+      this.fetchData();
+    }
+  };
+
+  fetchData = async () => {
+    this.setState({
+      isLoading: true,
+    });
+
+    const teamsPromise = this.props.fetchFunction();
     const numberOfTeamsPromise = fetchTotalNumberTeams();
     const [teams, numberOfTeams] = await Promise.all([
       teamsPromise,
@@ -27,7 +41,7 @@ export class TeamsContainer extends Component {
       teamsToDisplay: teams,
       isLoading: false,
     });
-  }
+  };
 
   teamList = () => {
     if (this.state.isLoading) {
@@ -54,11 +68,11 @@ export class TeamsContainer extends Component {
   containerHeader = () => {
     return (
       <div className="d-flex justify-content-between p-4 align-items-center">
-        <strong>All Teams</strong>
+        <strong>{this.props.text} Teams</strong>
         {this.state.isLoading ? (
           <Skeleton width={"200px"} />
         ) : (
-          <small class="text-muted">
+          <small className="text-muted">
             Showing {this.state.teamsToDisplay.length} out of{" "}
             {this.state.numberOfTeams} teams
           </small>
