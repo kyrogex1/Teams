@@ -13,6 +13,25 @@ const loadingPlaceHolder = (
 );
 
 export class TeamCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isPendingFavorite: false,
+    };
+  }
+
+  favoriteHandler = async () => {
+    this.setState({
+      isPendingFavorite: true,
+    });
+
+    await this.props.favoriteHandler(this.props.id);
+
+    this.setState({
+      isPendingFavorite: false,
+    });
+  };
+
   render() {
     if (this.props.isLoading) {
       return loadingPlaceHolder;
@@ -45,15 +64,23 @@ export class TeamCard extends Component {
                   </small>
                 </p>
               </div>
-              <button className="btn">
-                <img
-                  src={
-                    this.props.is_favorited
-                      ? iconFavoriteActive
-                      : iconFavoriteInactive
-                  }
-                />
-              </button>
+              {this.state.isPendingFavorite ? (
+                <button className="btn" disabled>
+                  <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </button>
+              ) : (
+                <button className="btn" onClick={this.favoriteHandler}>
+                  <img
+                    src={
+                      this.props.is_favorited
+                        ? iconFavoriteActive
+                        : iconFavoriteInactive
+                    }
+                  />
+                </button>
+              )}
             </div>
           </div>
 

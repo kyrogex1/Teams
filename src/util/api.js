@@ -44,3 +44,29 @@ export const fetchActivities = async () => {
 
   return activities;
 };
+
+export const favoriteTeam = async (teamId) => {
+  let teams;
+  ({ teams } = data);
+  const team = teams.find((team) => team.id === teamId);
+  await sleep();
+
+  if (team) {
+    team.is_favorited = true;
+  }
+
+  return;
+};
+
+export const unfavoriteTeam = async (teamId) => {
+  let teams;
+  ({ teams } = data);
+  const team = teams.find((team) => team.id === teamId);
+  await sleep();
+
+  if (team) {
+    team.is_favorited = false;
+  }
+
+  return;
+};

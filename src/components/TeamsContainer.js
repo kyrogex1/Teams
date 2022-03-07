@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { fetchTeams, fetchTotalNumberTeams } from "../util/api";
+import {
+  fetchTotalNumberTeams,
+  favoriteTeam,
+  unfavoriteTeam,
+} from "../util/api";
 import TeamCard from "./TeamCard";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -49,6 +53,30 @@ export class TeamsContainer extends Component {
     }
   };
 
+  favoriteHandler = async (teamId) => {
+    const teamsToDisplayClone = [...this.state.teamsToDisplay];
+    const teamToUpdateIndex = teamsToDisplayClone.findIndex(
+      (team) => team.id === teamId
+    );
+    const teamToUpdate = teamsToDisplayClone[teamToUpdateIndex];
+    let updatedTeam;
+
+    if (teamToUpdate.is_favorited) {
+      await unfavoriteTeam(teamToUpdate.id);
+      updatedTeam = { ...teamToUpdate, is_favorited: false };
+    } else {
+      await favoriteTeam(teamToUpdate.id);
+      updatedTeam = { ...teamToUpdate, is_favorited: true };
+    }
+
+    teamsToDisplayClone[teamToUpdateIndex] = updatedTeam;
+    this.setState({
+      teamsToDisplay: teamsToDisplayClone,
+    });
+
+    return;
+  };
+
   teamList = () => {
     if (this.state.isLoading) {
       return Array(3)
@@ -65,7 +93,7 @@ export class TeamsContainer extends Component {
     return this.state.teamsToDisplay.map((team) => {
       return (
         <div className="col-lg-4 col-md-6 col-sm-12" key={team.id}>
-          <TeamCard {...team} />
+          <TeamCard {...team} favoriteHandler={this.favoriteHandler} />
         </div>
       );
     });
