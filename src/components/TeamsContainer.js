@@ -23,7 +23,10 @@ export class TeamsContainer extends Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.fetchFunction !== this.props.fetchFunction) {
+    if (
+      prevProps.fetchFunction !== this.props.fetchFunction ||
+      prevProps.searchQuery !== this.props.searchQuery
+    ) {
       this.fetchData();
     }
   };
@@ -34,7 +37,7 @@ export class TeamsContainer extends Component {
     });
 
     const cacheFetchFuntion = this.props.fetchFunction;
-    const teamsPromise = this.props.fetchFunction();
+    const teamsPromise = this.props.fetchFunction(this.props.searchQuery);
     const numberOfTeamsPromise = fetchTotalNumberTeams();
     const [teams, numberOfTeams] = await Promise.all([
       teamsPromise,

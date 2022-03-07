@@ -5,7 +5,11 @@ function sleep(ms = 2000) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export const fetchTeams = async (isFavorite = false, isArchived = false) => {
+export const fetchTeams = async (
+  isFavorite = false,
+  isArchived = false,
+  nameFilter = ""
+) => {
   let teams;
   ({ teams } = data);
 
@@ -15,6 +19,12 @@ export const fetchTeams = async (isFavorite = false, isArchived = false) => {
 
   if (isArchived) {
     teams = teams.filter((team) => team.is_archived);
+  }
+
+  if (nameFilter) {
+    teams = teams.filter((team) =>
+      team?.name?.toLowerCase()?.includes?.(nameFilter.toLowerCase())
+    );
   }
   await sleep();
 
