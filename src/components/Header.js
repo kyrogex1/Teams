@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import iconNotification from "../assets/svg/icon-notifications.svg";
+import HeaderAvatar from "./HeaderAvatar";
 
 // TODO: Seperate the badge number
 export class Header extends Component {
@@ -22,7 +23,7 @@ export class Header extends Component {
               <button className="btn">
                 <img src={iconNotification} height="100%" />
               </button>
-              <p className="mb-0">Dropdown</p>
+              <HeaderAvatar />
             </div>
           </div>
         </div>

@@ -40,11 +40,11 @@ export const fetchTotalNumberTeams = async () => {
 };
 
 export const fetchCurrentUser = async () => {
-  let currentUser;
-  ({ currentUser } = data);
+  let current_user;
+  ({ current_user } = data);
   await sleep();
 
-  return currentUser;
+  return current_user;
 };
 
 export const fetchActivities = async () => {

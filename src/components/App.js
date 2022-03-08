@@ -4,34 +4,52 @@ import Teams from "./pages/Teams";
 import Sidebar from "./Sidebar";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import OtherPages from "./pages/OtherPages";
+import AuthContext from "../context/AuthContext";
+import { fetchCurrentUser } from "../util/api";
 
 export class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user : null
+    }
+  }
+
+  componentDidMount = async () => {
+    const user = await fetchCurrentUser();
+    this.setState({
+      user
+    });
+  }
+
   render() {
     return (
-      <BrowserRouter>
-        <div className="d-flex">
-          <div style={{ height: "100vh" }} className="sticky-top">
-            <Sidebar />
+      <AuthContext.Provider value={this.state.user}>
+        <BrowserRouter>
+          <div className="d-flex">
+            <div style={{ height: "100vh" }} className="sticky-top">
+              <Sidebar />
+            </div>
+            <div className="flex-grow-1 bg-light">
+              <Header />
+              <Switch>
+                <Route exact path="/">
+                  <Redirect to="/teams" />
+                </Route>
+                <Route path={"/teams/:selectedTab"} component={Teams} />
+                <Route path="/teams">
+                  <Redirect to="/teams/all" />
+                </Route>
+                <Route path="/" component={OtherPages} />
+                {/* TODO: Add 404
+                <Route path="*">
+                  <div>404 man</div>
+                </Route> */}
+              </Switch>
+            </div>
           </div>
-          <div className="flex-grow-1 bg-light">
-            <Header />
-            <Switch>
-              <Route exact path="/">
-                <Redirect to="/teams" />
-              </Route>
-              <Route path={"/teams/:selectedTab"} component={Teams} />
-              <Route path="/teams">
-                <Redirect to="/teams/all" />
-              </Route>
-              <Route path="/" component={OtherPages} />
-              {/* TODO: Add 404
-              <Route path="*">
-                <div>404 man</div>
-              </Route> */}
-            </Switch>
-          </div>
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </AuthContext.Provider>
     );
   }
 }
