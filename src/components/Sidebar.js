@@ -12,11 +12,12 @@ export class Sidebar extends Component {
   // TODO: Make a better CSS Styling for this
   sidebarElement = (sidebarLink, key) => {
     const { location } = this.props;
+    const locationFirstLevel = location.pathname.split("/")?.[1] ?? "";
 
     const pathActiveString =
-      location.pathname === sidebarLink.linkPath ? "active" : "";
+      locationFirstLevel === sidebarLink.linkPath ? "active" : "";
     return (
-      <Link to={sidebarLink?.linkPath} key={key}>
+      <Link to={"/" + sidebarLink?.linkPath} key={key}>
         <div className={`p-3 sidebarElements ${pathActiveString}`}>
           <img src={sidebarLink?.iconSrc} />
         </div>
@@ -29,19 +30,19 @@ export class Sidebar extends Component {
     const sidebarLinks = [
       {
         iconSrc: iconTeams,
-        linkPath: "/teams",
+        linkPath: "teams",
       },
       {
         iconSrc: iconLeads,
-        linkPath: "/leads",
+        linkPath: "leads",
       },
       {
         iconSrc: iconReports,
-        linkPath: "/reports",
+        linkPath: "reports",
       },
       {
         iconSrc: iconCampaign,
-        linkPath: "/campaign",
+        linkPath: "campaign",
       },
     ];
 

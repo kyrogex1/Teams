@@ -19,10 +19,10 @@ export class App extends Component {
               <Route exact path="/">
                 <Redirect to="/teams" />
               </Route>
-              <Route
-                path={["/teams/:selectedTab", "/teams"]}
-                component={Teams}
-              />
+              <Route path={"/teams/:selectedTab"} component={Teams} />
+              <Route path="/teams">
+                <Redirect to="/teams/all" />
+              </Route>
               <Route path="/" component={OtherPages} />
               {/* TODO: Add 404
               <Route path="*">

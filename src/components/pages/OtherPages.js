@@ -5,7 +5,7 @@ export class OtherPages extends Component {
     return (
       <div className="text-center">
         <img src="https://c.tenor.com/VGvz6lNaXkIAAAAC/satania-cry-satania.gif" />
-        <p>This page is not developed :(</p>
+        <p>This page is not yet developed :(</p>
       </div>
     );
   }
