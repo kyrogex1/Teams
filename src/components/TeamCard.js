@@ -85,7 +85,9 @@ export class TeamCard extends Component {
           </div>
 
           {/* Card Body */}
-          <p className="card-text card-truncate">{this.props.description}</p>
+          <p className="card-text card-description-truncate">
+            {this.props.description}
+          </p>
         </div>
         {/* Card Footer */}
         <div className="card-footer bg-transparent py-3">

@@ -32,7 +32,7 @@ export class Dropdown extends Component {
     return (
       <div className="position-relative">
         {/* Find out why without d-flex this button fucks up */}
-        <button className="ms-2 btn p-0 d-flex" onClick={this.toggleDropdown}>
+        <button className="ms-2 btn d-flex" onClick={this.toggleDropdown}>
           <span
             className={`${this.state.isOpen ? "triangle-up" : "triangle-down"}`}
           ></span>

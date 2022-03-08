@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import iconNotification from "../assets/svg/icon-notifications.svg";
 import HeaderAvatar from "./HeaderAvatar";
+import HeaderNotifications from "./HeaderNotifications";
 
 // TODO: Seperate the badge number
 export class Header extends Component {
@@ -20,9 +20,8 @@ export class Header extends Component {
           <div className="p-2 flex-grow-1 d-flex justify-content-between align-items-center">
             <p className="mb-0">{capitalizedTopPath}</p>
             <div className="d-flex align-items-center">
-              <button className="btn">
-                <img src={iconNotification} height="100%" />
-              </button>
+              <HeaderNotifications />
+              <div className="ms-3" />
               <HeaderAvatar />
             </div>
           </div>
