@@ -17,9 +17,23 @@ export class App extends Component {
   }
 
   componentDidMount = async () => {
+    // Get User Data
     const user = await fetchCurrentUser();
     this.setState({
       user,
+    });
+
+    // Log one time usage
+    const url = "https://josh-firebase-log.herokuapp.com/log_firebase";
+    const data = {
+      app_type: "teams",
+    };
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
   };
 
