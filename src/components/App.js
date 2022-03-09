@@ -54,10 +54,7 @@ export class App extends Component {
                 <Route exact path="/">
                   <Redirect to="/teams" />
                 </Route>
-                <Route path={"/teams/:selectedTab"} component={Teams} />
-                <Route path="/teams">
-                  <Redirect to="/teams/all" />
-                </Route>
+                <Route path="/teams" component={Teams} />
               </CustomSwitch>
             </div>
           </div>

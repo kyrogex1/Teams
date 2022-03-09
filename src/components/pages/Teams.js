@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import ActivitiesContainer from "../ActivitiesContainer";
-import { withRouter, Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import Tabs from "../Tabs";
 import TeamsContainer from "../TeamsContainer";
 import { fetchTeams } from "../../util/api";
 import Input from "../Input";
 import { ReactComponent as IconPlus } from "../../assets/svg/icon-plus.svg";
 import { ReactComponent as IconTeams } from "../../assets/svg/icon-teams.svg";
+import CustomSwitch from "../CustomSwitch";
 
 export const teamTabs = {
   all: {
@@ -41,8 +42,8 @@ export class Teams extends Component {
     });
   };
 
-  pageHeader = () => {
-    const selectedTab = this.props.match.params.selectedTab;
+  pageHeader = (tab) => {
+    const selectedTab = tab;
 
     return (
       <div className="bg-white pt-4 px-4 shadow-sm">
@@ -68,30 +69,38 @@ export class Teams extends Component {
   };
 
   render() {
-    const selectedTab = this.props.match.params.selectedTab;
-    if (!(selectedTab in teamTabs)) {
-      // TODO: Extract to components
-      return <div>404</div>;
-    }
+    const path = this.props.match.path;
+
     return (
-      <div>
-        {this.pageHeader()}
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-9">
-              <TeamsContainer
-                {...teamTabs[selectedTab]}
-                searchQuery={this.state.searchQuery}
-              />
-            </div>
-            <div className="col-lg-3">
-              <ActivitiesContainer />
-            </div>
-          </div>
-        </div>
-      </div>
+      <CustomSwitch>
+        <Route exact path={`${path}`}>
+          <Redirect to={`${path}/all`} />
+        </Route>
+        {/* Render a Route for each teamTab */}
+        {Object.keys(teamTabs).map((tab) => {
+          return (
+            <Route path={`${path}/${tab}`}>
+              {this.pageHeader(tab)}
+              <div className="container">
+                <div className="row">
+                  <div className="col-lg-9">
+                    <TeamsContainer
+                      {...teamTabs[tab]}
+                      searchQuery={this.state.searchQuery}
+                    />
+                  </div>
+                  <div className="col-lg-3">
+                    <ActivitiesContainer />
+                  </div>
+                </div>
+              </div>
+              );
+            </Route>
+          );
+        })}
+      </CustomSwitch>
     );
   }
 }
 
-export default withRouter(Teams);
+export default Teams;
