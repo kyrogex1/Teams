@@ -5,6 +5,8 @@ import Tabs from "../Tabs";
 import TeamsContainer from "../TeamsContainer";
 import { fetchTeams } from "../../util/api";
 import Input from "../Input";
+import { ReactComponent as IconPlus } from "../../assets/svg/icon-plus.svg";
+import { ReactComponent as IconTeams } from "../../assets/svg/icon-teams.svg";
 
 export const teamTabs = {
   all: {
@@ -45,8 +47,12 @@ export class Teams extends Component {
     return (
       <div className="bg-white pt-4 px-4 shadow-sm">
         <div className="d-flex justify-content-between mb-3">
-          <p>Teams</p>
-          <button className="btn btn-light-green">&#43; CREATE NEW TEAM</button>
+          <h2 className="d-flex align-items-center">
+            <IconTeams style={{ color: "#A4A6A8" }} className="me-3" /> Teams
+          </h2>
+          <button className="btn btn-light-green d-flex align-items-center">
+            <IconPlus className="me-2" /> CREATE NEW TEAM
+          </button>
         </div>
         <div className="d-flex justify-content-between align-items-center">
           <div>
