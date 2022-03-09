@@ -24,17 +24,20 @@ export class App extends Component {
     });
 
     // Log one time usage
-    const url = "https://josh-firebase-log.herokuapp.com/log_firebase";
-    const data = {
-      app_type: "teams",
-    };
-    await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const url = process.env.REACT_APP_FIREBASE_API_ENDPOINT;
+    if (url !== undefined && url.length > 0) {
+      const data = {
+        app_type: process.env.REACT_APP_APP_TYPE,
+        source: process.env.REACT_APP_SOURCE,
+      };
+      await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    }
   };
 
   render() {
