@@ -3,9 +3,10 @@ import Header from "./Header";
 import Teams from "./pages/Teams";
 import Sidebar from "./Sidebar";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import OtherPages from "./pages/OtherPages";
+import Page404 from "./pages/Page404";
 import AuthContext from "../context/AuthContext";
 import { fetchCurrentUser } from "../util/api";
+import CustomSwitch from "./CustomSwitch";
 
 export class App extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ export class App extends Component {
             </div>
             <div className="flex-grow-1 bg-light">
               <Header />
-              <Switch>
+              <CustomSwitch>
                 <Route exact path="/">
                   <Redirect to="/teams" />
                 </Route>
@@ -54,12 +55,7 @@ export class App extends Component {
                 <Route path="/teams">
                   <Redirect to="/teams/all" />
                 </Route>
-                <Route path="/" component={OtherPages} />
-                {/* TODO: Add 404
-                <Route path="*">
-                  <div>404 man</div>
-                </Route> */}
-              </Switch>
+              </CustomSwitch>
             </div>
           </div>
         </BrowserRouter>

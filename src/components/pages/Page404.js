@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export class OtherPages extends Component {
+export class Page404 extends Component {
   render() {
     return (
       <div className="text-center">
@@ -11,4 +11,4 @@ export class OtherPages extends Component {
   }
 }
 
-export default OtherPages;
+export default Page404;
