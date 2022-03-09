@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
-import iconSaleswhale from "../assets/svg/icon-saleswhale.svg";
-import iconTeams from "../assets/svg/icon-teams.svg";
-import iconLeads from "../assets/svg/icon-leads.svg";
-import iconReports from "../assets/svg/icon-reports.svg";
-import iconCampaign from "../assets/svg/icon-campaign.svg";
-import iconHelp from "../assets/svg/icon-help.svg";
+import { ReactComponent as IconSaleswhale } from "../assets/svg/icon-saleswhale.svg";
+import { ReactComponent as IconTeams } from "../assets/svg/icon-teams.svg";
+import { ReactComponent as IconLeads } from "../assets/svg/icon-leads.svg";
+import { ReactComponent as IconReports } from "../assets/svg/icon-reports.svg";
+import { ReactComponent as IconCampaign } from "../assets/svg/icon-campaign.svg";
+import { ReactComponent as IconHelp } from "../assets/svg/icon-help.svg";
 
 export class Sidebar extends Component {
   // TODO: Make a better CSS Styling for this
@@ -19,7 +19,7 @@ export class Sidebar extends Component {
     return (
       <Link to={"/" + sidebarLink?.linkPath} key={key}>
         <div className={`p-3 sidebarElements ${pathActiveString}`}>
-          <img src={sidebarLink?.iconSrc} />
+          <sidebarLink.svg className="text-white" />
         </div>
       </Link>
     );
@@ -29,19 +29,19 @@ export class Sidebar extends Component {
     // const sidebarLinks = [iconTeams, iconLeads, iconReports, iconCampaign];
     const sidebarLinks = [
       {
-        iconSrc: iconTeams,
+        svg: IconTeams,
         linkPath: "teams",
       },
       {
-        iconSrc: iconLeads,
+        svg: IconLeads,
         linkPath: "leads",
       },
       {
-        iconSrc: iconReports,
+        svg: IconReports,
         linkPath: "reports",
       },
       {
-        iconSrc: iconCampaign,
+        svg: IconCampaign,
         linkPath: "campaign",
       },
     ];
@@ -49,7 +49,7 @@ export class Sidebar extends Component {
     return (
       <div className="bg-dark-purple d-flex flex-column h-100">
         <div className="p-3">
-          <img src={iconSaleswhale} />
+          <IconSaleswhale />
         </div>
         <div className="flex-grow-1 flex-column d-flex">
           {sidebarLinks.map((sidebarLink, index) =>
@@ -58,7 +58,7 @@ export class Sidebar extends Component {
         </div>
         <a role="button">
           <div className="p-3 sidebarElements">
-            <img src={iconHelp} />
+            <IconHelp className="text-white" />
           </div>
         </a>
       </div>
