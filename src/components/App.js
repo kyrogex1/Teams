@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { fetchCurrentUser } from "../util/api";
 import CustomSwitch from "./CustomSwitch";
+import "../sass/main.scss";
 
 export class App extends Component {
   constructor(props) {

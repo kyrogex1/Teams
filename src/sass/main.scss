@@ -1,0 +1,90 @@
+// Import fonts from Google Fonts. Override bs default variables
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+$font-family-sans-serif: Nunito, sans-serif;
+
+// Import Bootstrap Styles
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Your own CSS rules
+.sidebarElements.active,
+.sidebarElements:hover {
+  background-color: var(--bs-primary);
+}
+.btn-light-green {
+  background: #40d2bf;
+  color: white;
+  border-color: #40d2bf;
+}
+
+.btn-light-green:hover {
+  background: #39cab7;
+  color: white;
+  border-color: #39bdab;
+}
+
+.bg-dark-purple {
+  background: #042235;
+}
+.sidebarElements svg,
+.sidebarElements svg {
+  opacity: 0.3;
+}
+
+.sidebarElements.active svg,
+.sidebarElements:hover svg {
+  opacity: 1;
+}
+
+.team-card.archived {
+  background: #ebeef2;
+}
+
+.card-description-truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.card-date-truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.triangle-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+  opacity: 0.2;
+}
+
+.triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+  opacity: 0.2;
+}
+
+.triangle-right {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid black;
+  opacity: 0.2;
+}
+
+.triangle-left {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid black;
+  opacity: 0.2;
+}
