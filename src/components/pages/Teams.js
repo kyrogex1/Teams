@@ -94,7 +94,6 @@ export class Teams extends Component {
                   </div>
                 </div>
               </div>
-              );
             </Route>
           );
         })}

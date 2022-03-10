@@ -3,7 +3,6 @@ import Header from "./Header";
 import Teams from "./pages/Teams";
 import Sidebar from "./Sidebar";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import Page404 from "./pages/Page404";
 import AuthContext from "../context/AuthContext";
 import { fetchCurrentUser } from "../util/api";
 import CustomSwitch from "./CustomSwitch";
