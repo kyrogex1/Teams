@@ -81,8 +81,8 @@ export class Teams extends Component {
           return (
             <Route path={`${path}/${tab}`}>
               {this.pageHeader(tab)}
-              <div className="container">
-                <div className="row">
+              <div className="container-fluid px-5 my-5">
+                <div className="row g-5">
                   <div className="col-lg-9">
                     <TeamsContainer
                       {...teamTabs[tab]}

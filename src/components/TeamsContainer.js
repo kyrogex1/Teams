@@ -120,7 +120,7 @@ export class TeamsContainer extends Component {
 
   render() {
     return (
-      <div className="bg-white m-4 shadow">
+      <div className="bg-white shadow">
         {this.containerHeader()}
         <hr className="m-0" />
         <div className="row p-4">{this.teamList()}</div>

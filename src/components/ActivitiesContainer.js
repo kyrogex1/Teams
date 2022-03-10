@@ -104,9 +104,9 @@ export class ActivitiesContainer extends Component {
 
   render() {
     return (
-      <div className="bg-white m-4 shadow">
+      <div className="bg-white shadow">
         <div className="d-flex justify-content-between p-4 align-items-center">
-          <strong>Activities</strong>
+          <strong>Activity</strong>
         </div>
         <hr className="m-0" />
         <div className="p-4">{this.activitiesList()}</div>
