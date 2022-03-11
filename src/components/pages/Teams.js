@@ -76,7 +76,7 @@ export class Teams extends Component {
         {/* Render a Route for each teamTab */}
         {teamTabs.map((tab) => {
           return (
-            <Route path={`${path}/${tab.pathLink}`}>
+            <Route path={`${path}/${tab.pathLink}`} key={tab}>
               {this.pageHeader(tab)}
               <div className="container-fluid px-5 my-5">
                 <div className="row g-5">

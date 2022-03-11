@@ -19,7 +19,7 @@ export class HeaderNotifications extends Component {
           <img src={iconMail} />
           {notificationText ? (
             <p
-              class="text-white d-flex justify-content-center align-items-center position-absolute mb-0 top-0 end-0 bg-primary border border-2 border-light rounded-circle"
+              className="text-white d-flex justify-content-center align-items-center position-absolute mb-0 top-0 end-0 bg-primary border border-2 border-light rounded-circle"
               style={{ width: "22px", height: "22px" }}
             >
               <span>{notificationText}</span>
