@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import iconSearch from "../assets/svg/icon-search.svg";
 
-export class Input extends Component {
+export class DebouncedInput extends Component {
   constructor(props) {
     super(props);
+    this.timeoutId = null;
     this.state = {
       value: "",
-      timeoutId: null,
     };
   }
 
@@ -16,12 +16,12 @@ export class Input extends Component {
       value,
     });
 
-    const timeoutId = setTimeout(() => this.props.onChange(value), 500);
-    clearTimeout(this.state.timeoutId);
-
-    this.setState({
-      timeoutId: timeoutId,
-    });
+    const timeoutId = setTimeout(
+      () => this.props.onChange(value),
+      this.props.debounceDuration
+    );
+    clearTimeout(this.timeoutId);
+    this.timeoutId = timeoutId;
   };
 
   render() {
@@ -44,4 +44,8 @@ export class Input extends Component {
   }
 }
 
-export default Input;
+DebouncedInput.defaultProps = {
+  debounceDuration: 500,
+};
+
+export default DebouncedInput;

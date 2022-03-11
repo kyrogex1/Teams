@@ -4,7 +4,7 @@ import { Redirect, Route } from "react-router-dom";
 import Tabs from "../Tabs";
 import TeamsContainer from "../TeamsContainer";
 import { fetchTeams } from "../../util/api";
-import Input from "../Input";
+import DebouncedInput from "../Input";
 import { ReactComponent as IconPlus } from "../../assets/svg/icon-plus.svg";
 import { ReactComponent as IconTeams } from "../../assets/svg/icon-teams.svg";
 import CustomSwitch from "../CustomSwitch";
@@ -59,7 +59,7 @@ export class Teams extends Component {
           <div>
             <Tabs tabs={teamTabs} selected={selectedTab} />
           </div>
-          <Input onChange={this.onSearchChange} />
+          <DebouncedInput onChange={this.onSearchChange} />
         </div>
       </div>
     );
