@@ -9,23 +9,23 @@ import { ReactComponent as IconPlus } from "../../assets/svg/icon-plus.svg";
 import { ReactComponent as IconTeams } from "../../assets/svg/icon-teams.svg";
 import CustomSwitch from "../CustomSwitch";
 
-export const teamTabs = {
-  all: {
+export const teamTabs = [
+  {
     text: "All",
     fetchFunction: (searchQuery) => fetchTeams(false, false, searchQuery),
     pathLink: "all",
   },
-  favorites: {
+  {
     text: "Favorited",
     fetchFunction: (searchQuery) => fetchTeams(true, false, searchQuery),
     pathLink: "favorites",
   },
-  archived: {
+  {
     text: "Archived",
     fetchFunction: (searchQuery) => fetchTeams(false, true, searchQuery),
     pathLink: "archived",
   },
-};
+];
 
 // TODO: Add maxlines to created on text.
 export class Teams extends Component {
@@ -57,10 +57,7 @@ export class Teams extends Component {
         </div>
         <div className="d-flex justify-content-between align-items-center">
           <div>
-            <Tabs
-              tabs={Object.values(teamTabs)}
-              selected={teamTabs[selectedTab]}
-            />
+            <Tabs tabs={teamTabs} selected={selectedTab} />
           </div>
           <Input onChange={this.onSearchChange} />
         </div>
@@ -77,15 +74,15 @@ export class Teams extends Component {
           <Redirect to={`${path}/all`} />
         </Route>
         {/* Render a Route for each teamTab */}
-        {Object.keys(teamTabs).map((tab) => {
+        {teamTabs.map((tab) => {
           return (
-            <Route path={`${path}/${tab}`}>
+            <Route path={`${path}/${tab.pathLink}`}>
               {this.pageHeader(tab)}
               <div className="container-fluid px-5 my-5">
                 <div className="row g-5">
                   <div className="col-lg-9">
                     <TeamsContainer
-                      {...teamTabs[tab]}
+                      {...tab}
                       searchQuery={this.state.searchQuery}
                     />
                   </div>
