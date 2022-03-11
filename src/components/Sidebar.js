@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { NavLink, Link, withRouter } from "react-router-dom";
 
 import { ReactComponent as IconSaleswhale } from "../assets/svg/icon-saleswhale.svg";
 import { ReactComponent as IconTeams } from "../assets/svg/icon-teams.svg";
@@ -11,22 +11,23 @@ import { ReactComponent as IconHelp } from "../assets/svg/icon-help.svg";
 export class Sidebar extends Component {
   // TODO: Make a better CSS Styling for this
   sidebarElement = (sidebarLink, key) => {
-    const { location } = this.props;
-    const locationFirstLevel = location.pathname.split("/")?.[1] ?? "";
-
-    const pathActiveString =
-      locationFirstLevel === sidebarLink.linkPath ? "active" : "";
+    const url = this.props?.match?.url ?? "/";
     return (
-      <Link to={"/" + sidebarLink?.linkPath} key={key}>
-        <div className={`p-3 sidebarElements ${pathActiveString}`}>
+      <NavLink
+        to={url + sidebarLink?.linkPath}
+        key={key}
+        className="sidebarElements"
+        activeClassName="active"
+      >
+        <div className="p-3">
           <sidebarLink.svg className="text-white" />
         </div>
-      </Link>
+      </NavLink>
     );
   };
 
   render() {
-    // const sidebarLinks = [iconTeams, iconLeads, iconReports, iconCampaign];
+    const url = this.props?.match?.url ?? "/";
     const sidebarLinks = [
       {
         svg: IconTeams,
@@ -56,11 +57,11 @@ export class Sidebar extends Component {
             this.sidebarElement(sidebarLink, index)
           )}
         </div>
-        <a role="button">
+        <NavLink role="button" to={url + "help"}>
           <div className="p-3 sidebarElements">
             <IconHelp className="text-white" />
           </div>
-        </a>
+        </NavLink>
       </div>
     );
   }
