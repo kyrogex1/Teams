@@ -93,13 +93,17 @@ export class TeamsContainer extends Component {
         });
     }
 
-    return this.state.teamsToDisplay.map((team) => {
-      return (
-        <div className="col-lg-4 col-md-6 col-sm-12" key={team.id}>
-          <TeamCard {...team} favoriteHandler={this.favoriteHandler} />
-        </div>
-      );
-    });
+    if (this.state.teamsToDisplay.length > 0) {
+      return this.state.teamsToDisplay.map((team) => {
+        return (
+          <div className="col-lg-4 col-md-6 col-sm-12" key={team.id}>
+            <TeamCard {...team} favoriteHandler={this.favoriteHandler} />
+          </div>
+        );
+      });
+    } else {
+      return <p>No teams found</p>;
+    }
   };
 
   containerHeader = () => {
