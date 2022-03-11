@@ -1,27 +1,61 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import { Link } from "react-router-dom";
 
-const tabItem = (text, isSelected, pathLink, key) => {
-  const classNames = isSelected
-    ? "p-3 border-primary text-primary border-5 border-bottom"
-    : "p-3 text-dark ";
-
-  return (
-    <Link to={pathLink} style={{ textDecoration: "none" }} key={key}>
-      <div className={classNames}>
-        <strong>{text}</strong>
-      </div>
-    </Link>
-  );
-};
-
 export class Tabs extends Component {
+  constructor(props) {
+    super(props);
+    this.selectedRef = createRef();
+    this.state = {
+      underlineWidth: 0,
+      underlineLeft: 0,
+    };
+  }
+
+  tabItem = (text, isSelected, pathLink, key) => {
+    return (
+      <Link
+        to={pathLink}
+        className={
+          "text-decoration-none " + (isSelected ? "text-primary" : "text-dark")
+        }
+        key={key}
+      >
+        <div className="p-3" ref={isSelected ? this.refCallback : null}>
+          <strong>{text}</strong>
+        </div>
+      </Link>
+    );
+  };
+
+  refCallback = (node) => {
+    if (node) {
+      this.setState({
+        underlineLeft: node.offsetLeft,
+        underlineWidth: node.getBoundingClientRect()?.width,
+      });
+    }
+  };
+
   render() {
     return (
-      <div className="d-flex">
-        {this.props.tabs.map((tab, index) =>
-          tabItem(tab.text, this.props.selected == tab, tab.pathLink, index)
-        )}
+      <div className="position-relative">
+        <div className="d-flex">
+          {this.props.tabs.map((tab, index) =>
+            this.tabItem(
+              tab.text,
+              this.props.selected == tab,
+              tab.pathLink,
+              index
+            )
+          )}
+        </div>
+        <div
+          className="border-bottom border-primary border-5 position-absolute tabs-underline"
+          style={{
+            width: this.state.underlineWidth,
+            left: this.state.underlineLeft,
+          }}
+        ></div>
       </div>
     );
   }

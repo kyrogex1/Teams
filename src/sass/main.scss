@@ -88,3 +88,8 @@ $font-family-sans-serif: Nunito, sans-serif;
   border-right: 5px solid black;
   opacity: 0.2;
 }
+
+.tabs-underline {
+  transition: all 0.5s;
+  bottom: 0;
+}
