@@ -58,12 +58,6 @@ export class App extends Component {
                 </Route>
                 <Route path="/teams" component={Teams} />
               </CustomSwitch>
-              <button
-                className="btn btn-primary"
-                onClick={() => this.setState({ opened: true })}
-              >
-                Open Modal
-              </button>
             </div>
           </div>
         </BrowserRouter>

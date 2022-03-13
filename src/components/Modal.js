@@ -24,7 +24,7 @@ export default function Modal({ open, children, onClose }) {
           onExited={() => setShowContent(false)}
         >
           <div
-            className="modal-dialog-box"
+            className="modal-dialog-box overflow-auto"
             onClick={(e) => e?.stopPropagation()}
           >
             {/* Close button on the top right */}
