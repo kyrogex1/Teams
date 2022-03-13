@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { CSSTransition } from "react-transition-group";
 
-// TODO: Animate dropdown minheight ?
 export class Dropdown extends Component {
   constructor(props) {
     super(props);
@@ -37,9 +37,14 @@ export class Dropdown extends Component {
             className={`${this.state.isOpen ? "triangle-up" : "triangle-down"}`}
           ></span>
         </button>
-        {this.state.isOpen ? (
+        <CSSTransition
+          in={this.state.isOpen}
+          timeout={300}
+          classNames="cssT-dropdown-grow"
+          unmountOnExit
+        >
           <div
-            className="position-absolute bg-white border"
+            className="position-absolute bg-white border overflow-hidden"
             style={{
               right: "0px",
               width: "150px",
@@ -49,7 +54,7 @@ export class Dropdown extends Component {
               this.dropdownElement(item, index)
             )}
           </div>
-        ) : null}
+        </CSSTransition>
       </div>
     );
   }

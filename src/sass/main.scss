@@ -160,3 +160,26 @@ $font-family-sans-serif: Nunito, sans-serif;
   top: 25%;
   transition: all 0.3s;
 }
+
+// Dropdown animations
+.cssT-dropdown-grow-enter {
+  max-height: 0;
+}
+
+.cssT-dropdown-grow-enter-active {
+  max-height: 500px;
+  transition: all 0.3s;
+}
+
+.cssT-dropdown-grow-enter-done {
+  max-height: 500px;
+}
+
+.cssT-dropdown-grow-exit {
+  max-height: 500px;
+}
+
+.cssT-dropdown-grow-exit-active {
+  max-height: 0;
+  transition: all 0.3s;
+}
