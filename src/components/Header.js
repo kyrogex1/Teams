@@ -14,9 +14,9 @@ export class Header extends Component {
     return (
       <div className="border-bottom">
         <div className="d-flex">
-          <div className="py-2 px-3 border-end d-flex justify-content-center align-items-center">
+          <h4 className="py-2 px-3 border-end d-flex justify-content-center align-items-center mb-0">
             Narwhal
-          </div>
+          </h4>
           <div className="p-2 flex-grow-1 d-flex justify-content-between align-items-center">
             <p className="mb-0">{capitalizedTopPath}</p>
             <div className="d-flex align-items-center">
