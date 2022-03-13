@@ -27,6 +27,7 @@ export class Tabs extends Component {
     );
   };
 
+  // REFLECTION: Find out exactly how refs work
   refCallback = (node) => {
     if (node) {
       this.setState({
