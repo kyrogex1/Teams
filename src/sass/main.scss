@@ -5,6 +5,16 @@ $font-family-sans-serif: Nunito, sans-serif;
 // Import Bootstrap Styles
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+#root {
+  z-index: 1;
+  position: relative;
+}
+
+#modal {
+  z-index: 2;
+  position: relative;
+}
+
 // Your own CSS rules
 .sidebarElements.active,
 .sidebarElements:hover {

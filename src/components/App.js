@@ -9,6 +9,8 @@ import CustomSwitch from "./CustomSwitch";
 import "../sass/main.scss";
 import Modal from "./Modal";
 
+const GIT_REPO_URL = "https://github.com/kyrogex1/Teams";
+
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +21,11 @@ export class App extends Component {
   }
 
   componentDidMount = async () => {
+    // Open welcome message
+    this.setState({
+      opened: true,
+    });
+
     // Get User Data
     const user = await fetchCurrentUser();
     this.setState({
@@ -67,20 +74,40 @@ export class App extends Component {
           open={this.state.opened}
           onClose={() => this.setState({ opened: false })}
         >
-          <h3>Welcome to my page</h3>
+          <h2>Welcome to my 6Sense Frontend Engineer Assignment</h2>
           <p>
-            Hi, I am Joshua. It was a pleasure to work on this assignment from
-            Saleswhale / 6 Sense and I have learnt alot. Checkout these extra
-            features
+            Hey there, I am Joshua. Thank you for checking up my assignment, it
+            has been a pleasure working on this. You may check the code
+            repository{" "}
+            <a href={GIT_REPO_URL} target="_blank">
+              here
+            </a>
           </p>
+          <h4>Additional features</h4>
           <ul>
-            <li>pepega</li>
-            <li>pepega</li>
-            <li>pepega</li>
+            <li>Try favoriting a team (and then switch tabs)</li>
+            <li>Try searching a team in the search box</li>
+            <li>
+              Try clicking on the profile avatar in the top right to open a
+              dropdown
+            </li>
+            <li>Click on the other links on the left sidebar</li>
+          </ul>
+          <h4>TODO</h4>
+          <ul>
+            <li>Add pagination for team cards</li>
+            <li>Move search query from state to url params</li>
+            <li>Add create new card feature</li>
+            <li>Enable open welcome message from profile avatar dropdown</li>
           </ul>
 
           {/* TODO: Make this button onClose */}
-          <button className="btn btn-primary float-end">Close</button>
+          <button
+            className="btn btn-primary float-end"
+            onClick={() => this.setState({ opened: false })}
+          >
+            Close
+          </button>
         </Modal>
       </AuthContext.Provider>
     );
