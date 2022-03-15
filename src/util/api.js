@@ -1,5 +1,7 @@
 import data from "./data.json";
 
+const USE_LOCAL_STORAGE = process.env.REACT_USE_LOCAL_STORAGE ?? true;
+
 // Function to simulate network delay
 function sleep(ms = 2000) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -10,8 +12,11 @@ export const fetchTeams = async (
   isArchived = false,
   nameFilter = ""
 ) => {
+  await sleep();
+
   let teams;
-  ({ teams } = data);
+  const cachedData = getData();
+  teams = cachedData.teams;
 
   if (isFavorite) {
     teams = teams.filter((team) => team.is_favorited);
@@ -26,57 +31,97 @@ export const fetchTeams = async (
       team?.name?.toLowerCase()?.includes?.(nameFilter.toLowerCase())
     );
   }
-  await sleep();
 
   return teams;
 };
 
 export const fetchTotalNumberTeams = async () => {
-  let teams;
-  ({ teams } = data);
   await sleep();
+
+  let teams;
+  const cachedData = getData();
+  teams = cachedData.teams;
 
   return teams.length;
 };
 
 export const fetchCurrentUser = async () => {
+  await sleep();
+
   let current_user;
   ({ current_user } = data);
-  await sleep();
 
   return current_user;
 };
 
 export const fetchActivities = async () => {
+  await sleep();
+
   let activities;
   ({ activities } = data);
-  await sleep();
 
   return activities;
 };
 
 export const favoriteTeam = async (teamId) => {
-  let teams;
-  ({ teams } = data);
-  const team = teams.find((team) => team.id === teamId);
   await sleep();
+
+  let teams;
+  const cachedData = getData();
+  teams = cachedData.teams;
+  const team = teams.find((team) => team.id === teamId);
 
   if (team) {
     team.is_favorited = true;
+    setData(cachedData);
   }
 
   return;
 };
 
 export const unfavoriteTeam = async (teamId) => {
-  let teams;
-  ({ teams } = data);
-  const team = teams.find((team) => team.id === teamId);
   await sleep();
+
+  let teams;
+  const cachedData = getData();
+  teams = cachedData.teams;
+  const team = teams.find((team) => team.id === teamId);
 
   if (team) {
     team.is_favorited = false;
+    setData(cachedData);
   }
 
   return;
+};
+
+if (USE_LOCAL_STORAGE) {
+  Storage.prototype.setObject = function (key, value) {
+    this.setItem(key, JSON.stringify(value));
+  };
+
+  Storage.prototype.getObject = function (key) {
+    var value = this.getItem(key);
+    return value && JSON.parse(value);
+  };
+
+  const cachedData = localStorage.getObject("data");
+  if (!cachedData) {
+    localStorage.setObject("data", data);
+  }
+}
+
+const getData = () => {
+  if (USE_LOCAL_STORAGE) {
+    return localStorage.getObject("data");
+  } else {
+    return data;
+  }
+};
+
+const setData = (newData) => {
+  // Dont need to do anything if not using localStorage
+  if (USE_LOCAL_STORAGE) {
+    localStorage.setObject("data", newData);
+  }
 };
