@@ -96,7 +96,6 @@ export class App extends Component {
           <h4>TODO</h4>
           <ul>
             <li>Add pagination for team cards</li>
-            <li>Move search query from state to url params</li>
             <li>Add create new card feature</li>
             <li>Enable open welcome message from profile avatar dropdown</li>
           </ul>
