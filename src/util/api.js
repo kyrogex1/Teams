@@ -1,31 +1,18 @@
 import data from "./data.json";
+import { isNullOrUndefined } from "./utils";
 
 // Function to simulate network delay
-function sleep(ms = 2000) {
+function sleep(ms = 200) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export const fetchTeams = async (
-  isFavorite = false,
-  isArchived = false,
-  nameFilter = ""
+  fetchOptions,
+  itemOffset = 0,
+  itemsToFetch = 0
 ) => {
-  let teams;
-  ({ teams } = data);
-
-  if (isFavorite) {
-    teams = teams.filter((team) => team.is_favorited);
-  }
-
-  if (isArchived) {
-    teams = teams.filter((team) => team.is_archived);
-  }
-
-  if (nameFilter) {
-    teams = teams.filter((team) =>
-      team?.name?.toLowerCase()?.includes?.(nameFilter.toLowerCase())
-    );
-  }
+  let teams = filterTeams(fetchOptions);
+  teams = teams.slice(itemOffset, itemOffset + itemsToFetch);
   await sleep();
 
   return teams;
@@ -34,6 +21,13 @@ export const fetchTeams = async (
 export const fetchTotalNumberTeams = async () => {
   let teams;
   ({ teams } = data);
+  await sleep();
+
+  return teams.length;
+};
+
+export const fetchNumberMatchedTeams = async (fetchOptions) => {
+  let teams = filterTeams(fetchOptions);
   await sleep();
 
   return teams.length;
@@ -79,4 +73,26 @@ export const unfavoriteTeam = async (teamId) => {
   }
 
   return;
+};
+
+const filterTeams = (fetchOptions) => {
+  const { isFavorite, isArchived, searchQuery } = fetchOptions;
+
+  let { teams } = data;
+
+  if (!isNullOrUndefined(isFavorite)) {
+    teams = teams.filter((team) => team.is_favorited);
+  }
+
+  if (!isNullOrUndefined(isArchived)) {
+    teams = teams.filter((team) => team.is_archived);
+  }
+
+  if (searchQuery) {
+    teams = teams.filter((team) =>
+      team?.name?.toLowerCase()?.includes?.(searchQuery.toLowerCase())
+    );
+  }
+
+  return teams;
 };

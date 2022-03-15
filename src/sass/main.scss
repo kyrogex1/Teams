@@ -104,6 +104,10 @@ $font-family-sans-serif: Nunito, sans-serif;
   bottom: 0;
 }
 
+.page-item:not(.disabled) {
+  cursor: pointer;
+}
+
 // Modal Overlay
 .modal-overlay {
   position: fixed;

@@ -4,7 +4,6 @@ import { Redirect, Route, withRouter } from "react-router-dom";
 import queryString from "query-string";
 import Tabs from "../Tabs";
 import TeamsContainer from "../TeamsContainer";
-import { fetchTeams } from "../../util/api";
 import DebouncedInput from "../DebouncedInput";
 import { ReactComponent as IconPlus } from "../../assets/svg/icon-plus.svg";
 import { ReactComponent as IconTeams } from "../../assets/svg/icon-teams.svg";
@@ -13,17 +12,23 @@ import CustomSwitch from "../CustomSwitch";
 export const teamTabs = [
   {
     text: "All",
-    fetchFunction: (searchQuery) => fetchTeams(false, false, searchQuery),
+    fetchOptions: { isFavorite: null, isArchived: null },
     pathLink: "all",
   },
   {
     text: "Favorited",
-    fetchFunction: (searchQuery) => fetchTeams(true, false, searchQuery),
+    fetchOptions: {
+      isFavorite: true,
+      isArchived: null,
+    },
     pathLink: "favorites",
   },
   {
     text: "Archived",
-    fetchFunction: (searchQuery) => fetchTeams(false, true, searchQuery),
+    fetchOptions: {
+      isFavorite: null,
+      isArchived: true,
+    },
     pathLink: "archived",
   },
 ];
@@ -84,6 +89,7 @@ export class Teams extends Component {
 
     const queryParams = queryString.parse(this.props.location.search);
     const searchQuery = queryParams.query ?? "";
+    const fetchOptions = {};
 
     return (
       <CustomSwitch>
@@ -98,7 +104,9 @@ export class Teams extends Component {
               <div className="container-fluid px-5 my-5">
                 <div className="row g-5">
                   <div className="col-lg-9">
-                    <TeamsContainer {...tab} searchQuery={searchQuery} />
+                    <TeamsContainer
+                      fetchOptions={{ ...tab.fetchOptions, searchQuery }}
+                    />
                   </div>
                   <div className="col-lg-3">
                     <ActivitiesContainer />

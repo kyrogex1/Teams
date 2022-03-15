@@ -2,18 +2,25 @@ import React, { Component } from "react";
 import {
   fetchTotalNumberTeams,
   favoriteTeam,
+  fetchNumberMatchedTeams,
   unfavoriteTeam,
+  fetchTeams,
 } from "../util/api";
+import queryString from "query-string";
 import TeamCard from "./TeamCard";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Pagination from "./Pagination";
+import { withRouter } from "react-router-dom";
 
 export class TeamsContainer extends Component {
   constructor(props) {
     super(props);
     this.cancelSignal = { cancel: false };
     this.state = {
+      teamsPerPage: 3,
       numberOfTeams: 0,
+      numberOfTeamsMatched: 0,
       teamsToDisplay: [],
       isLoading: true,
     };
@@ -24,10 +31,26 @@ export class TeamsContainer extends Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    if (
-      prevProps.fetchFunction !== this.props.fetchFunction ||
-      prevProps.searchQuery !== this.props.searchQuery
-    ) {
+    const queryParams = queryString.parse(this.props.location.search);
+    const currentPage = queryParams.page ?? 1;
+
+    const prevQueryParams = queryString.parse(prevProps.location.search);
+    const prevPage = prevQueryParams.page ?? 1;
+
+    let shouldRefetch = false;
+
+    // Refetch if any of the search options or page change
+    for (let key in this.props.fetchOptions) {
+      if (this.props.fetchOptions[key] !== prevProps.fetchOptions[key]) {
+        shouldRefetch = true;
+      }
+    }
+
+    if (currentPage !== prevPage) {
+      shouldRefetch = true;
+    }
+
+    if (shouldRefetch) {
       this.fetchData();
     }
   };
@@ -42,11 +65,22 @@ export class TeamsContainer extends Component {
     const cancelSignal = { cancel: false };
     this.cancelSignal = cancelSignal;
 
-    const teamsPromise = this.props.fetchFunction(this.props.searchQuery);
+    const queryParams = queryString.parse(this.props.location.search);
+    const currentPage = queryParams.page ?? 1;
+
+    const teamsPromise = fetchTeams(
+      this.props.fetchOptions,
+      (currentPage - 1) * this.state.teamsPerPage, // -1 since page is 1-indexed, but slicing is 0-indexed
+      this.state.teamsPerPage
+    );
     const numberOfTeamsPromise = fetchTotalNumberTeams();
-    const [teams, numberOfTeams] = await Promise.all([
+    const numberOfTeamsMatchedPromise = fetchNumberMatchedTeams(
+      this.props.fetchOptions
+    );
+    const [teams, numberOfTeams, numberOfTeamsMatched] = await Promise.all([
       teamsPromise,
       numberOfTeamsPromise,
+      numberOfTeamsMatchedPromise,
     ]);
 
     // Guard to prevent updating teams whenver
@@ -56,6 +90,7 @@ export class TeamsContainer extends Component {
         numberOfTeams: numberOfTeams,
         teamsToDisplay: teams,
         isLoading: false,
+        numberOfTeamsMatched,
       });
     }
   };
@@ -82,6 +117,21 @@ export class TeamsContainer extends Component {
     });
 
     return;
+  };
+
+  onPageChange = (page) => {
+    const queryParams = queryString.parse(this.props.location.search);
+    let newQueries;
+    if (page <= 1) {
+      newQueries = queryParams;
+      delete newQueries.page;
+    } else {
+      newQueries = { ...queryParams, page };
+    }
+
+    this.props.history.push({
+      search: queryString.stringify(newQueries),
+    });
   };
 
   teamList = () => {
@@ -118,7 +168,7 @@ export class TeamsContainer extends Component {
           <Skeleton width={"200px"} />
         ) : (
           <small className="text-muted">
-            Showing {this.state.teamsToDisplay.length} out of{" "}
+            Showing {this.state.numberOfTeamsMatched} out of{" "}
             {this.state.numberOfTeams} teams
           </small>
         )}
@@ -127,14 +177,24 @@ export class TeamsContainer extends Component {
   };
 
   render() {
+    const queryParams = queryString.parse(this.props.location.search);
+    const currentPage = queryParams.page ?? 1;
     return (
       <div className="bg-white shadow">
         {this.containerHeader()}
         <hr className="m-0" />
         <div className="row p-4">{this.teamList()}</div>
+        <div className="p-4 d-flex justify-content-center">
+          <Pagination
+            pageSize={this.state.teamsPerPage}
+            totalCount={this.state.numberOfTeamsMatched}
+            currentPage={parseInt(currentPage)}
+            onPageChange={this.onPageChange}
+          />
+        </div>
       </div>
     );
   }
 }
 
-export default TeamsContainer;
+export default withRouter(TeamsContainer);
