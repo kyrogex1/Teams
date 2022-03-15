@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 import ActivitiesContainer from "../ActivitiesContainer";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, withRouter } from "react-router-dom";
+import queryString from "query-string";
 import Tabs from "../Tabs";
 import TeamsContainer from "../TeamsContainer";
 import { fetchTeams } from "../../util/api";
-import DebouncedInput from "../Input";
+import DebouncedInput from "../DebouncedInput";
 import { ReactComponent as IconPlus } from "../../assets/svg/icon-plus.svg";
 import { ReactComponent as IconTeams } from "../../assets/svg/icon-teams.svg";
 import CustomSwitch from "../CustomSwitch";
@@ -31,16 +32,29 @@ export const teamTabs = [
 export class Teams extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchQuery: "",
-    };
+    this.inputRef = createRef(null);
   }
 
   onSearchChange = (query) => {
-    this.setState({
-      searchQuery: query,
+    const queryParams = queryString.parse(this.props.location.search);
+    let newQueries;
+    if (query === "") {
+      newQueries = queryParams;
+      delete newQueries.query;
+    } else {
+      newQueries = { ...queryParams, query };
+    }
+
+    this.props.history.push({
+      search: queryString.stringify(newQueries),
     });
   };
+
+  componentDidUpdate() {
+    const queryParams = queryString.parse(this.props.location.search);
+    const searchQuery = queryParams.query ?? "";
+    this.inputRef?.current?.setQuery(searchQuery);
+  }
 
   pageHeader = (tab) => {
     const selectedTab = tab;
@@ -59,7 +73,7 @@ export class Teams extends Component {
           <div>
             <Tabs tabs={teamTabs} selected={selectedTab} />
           </div>
-          <DebouncedInput onChange={this.onSearchChange} />
+          <DebouncedInput ref={this.inputRef} onChange={this.onSearchChange} />
         </div>
       </div>
     );
@@ -67,6 +81,9 @@ export class Teams extends Component {
 
   render() {
     const path = this.props.match.path;
+
+    const queryParams = queryString.parse(this.props.location.search);
+    const searchQuery = queryParams.query ?? "";
 
     return (
       <CustomSwitch>
@@ -81,10 +98,7 @@ export class Teams extends Component {
               <div className="container-fluid px-5 my-5">
                 <div className="row g-5">
                   <div className="col-lg-9">
-                    <TeamsContainer
-                      {...tab}
-                      searchQuery={this.state.searchQuery}
-                    />
+                    <TeamsContainer {...tab} searchQuery={searchQuery} />
                   </div>
                   <div className="col-lg-3">
                     <ActivitiesContainer />
@@ -99,4 +113,4 @@ export class Teams extends Component {
   }
 }
 
-export default Teams;
+export default withRouter(Teams);

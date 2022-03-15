@@ -24,6 +24,15 @@ export class DebouncedInput extends Component {
     this.timeoutId = timeoutId;
   };
 
+  // Escape hatch to allow parent to set state value
+  setQuery = (query) => {
+    if (query !== this.state.value) {
+      this.setState({ value: query }, () =>
+        this.props.onChange(this.state.value)
+      );
+    }
+  };
+
   render() {
     return (
       <div className="d-flex me-3 align-items-center">

@@ -11,6 +11,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 export class TeamsContainer extends Component {
   constructor(props) {
     super(props);
+    this.cancelSignal = { cancel: false };
     this.state = {
       numberOfTeams: 0,
       teamsToDisplay: [],
@@ -36,7 +37,11 @@ export class TeamsContainer extends Component {
       isLoading: true,
     });
 
-    const cacheFetchFuntion = this.props.fetchFunction;
+    // Cancel previous fetch
+    this.cancelSignal.cancel = true;
+    const cancelSignal = { cancel: false };
+    this.cancelSignal = cancelSignal;
+
     const teamsPromise = this.props.fetchFunction(this.props.searchQuery);
     const numberOfTeamsPromise = fetchTotalNumberTeams();
     const [teams, numberOfTeams] = await Promise.all([
@@ -44,10 +49,9 @@ export class TeamsContainer extends Component {
       numberOfTeamsPromise,
     ]);
 
-    // Guard to prevent bug when user switches between tabs
-    // rapidly. Only show results when current fetchFunction
-    // is the same as the one used to fetch results.
-    if (cacheFetchFuntion === this.props.fetchFunction) {
+    // Guard to prevent updating teams whenver
+    // params eg(fetchFunction / searchQuery / page)
+    if (!cancelSignal.cancel) {
       this.setState({
         numberOfTeams: numberOfTeams,
         teamsToDisplay: teams,
