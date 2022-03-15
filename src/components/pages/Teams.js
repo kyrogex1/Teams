@@ -105,6 +105,7 @@ export class Teams extends Component {
                 <div className="row g-5">
                   <div className="col-lg-9">
                     <TeamsContainer
+                      text={tab.text}
                       fetchOptions={{ ...tab.fetchOptions, searchQuery }}
                     />
                   </div>
