@@ -92,10 +92,10 @@ export class App extends Component {
               dropdown
             </li>
             <li>Click on the other links on the left sidebar</li>
+            <li>Add pagination for team cards</li>
           </ul>
           <h4>TODO</h4>
           <ul>
-            <li>Add pagination for team cards</li>
             <li>Add create new card feature</li>
             <li>Enable open welcome message from profile avatar dropdown</li>
           </ul>
