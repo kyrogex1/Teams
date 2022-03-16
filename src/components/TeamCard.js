@@ -59,13 +59,13 @@ export class TeamCard extends Component {
                 <p className="card-text">
                   <small className="text-muted card-date-truncate">
                     {this.props.created_at
-                      ? `Created on ${this.props.created_at}`
+                      ? `Created ${this.props.created_at}`
                       : "\u00A0"}
                   </small>
                 </p>
               </div>
               {this.state.isPendingFavorite ? (
-                <button className="btn" disabled>
+                <button className="btn p-0" disabled>
                   <div
                     className="spinner-border spinner-border-sm"
                     role="status"
@@ -74,7 +74,7 @@ export class TeamCard extends Component {
                   </div>
                 </button>
               ) : (
-                <button className="btn" onClick={this.favoriteHandler}>
+                <button className="btn p-0" onClick={this.favoriteHandler}>
                   <img
                     src={
                       this.props.is_favorited

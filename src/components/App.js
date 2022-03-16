@@ -54,7 +54,7 @@ export class App extends Component {
       <AuthContext.Provider value={this.state.user}>
         <BrowserRouter>
           <div className="d-flex">
-            <div style={{ height: "100vh" }} className="sticky-top">
+            <div className="sticky-top sidebar-container">
               <Sidebar />
             </div>
             <div className="flex-grow-1 bg-light">

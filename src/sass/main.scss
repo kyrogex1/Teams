@@ -16,6 +16,9 @@ $font-family-sans-serif: Nunito, sans-serif;
 }
 
 // Your own CSS rules
+.sidebar-container {
+  height: 100vh;
+}
 .sidebarElements.active,
 .sidebarElements:hover {
   background-color: var(--bs-primary);

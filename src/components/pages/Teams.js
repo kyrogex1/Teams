@@ -103,13 +103,13 @@ export class Teams extends Component {
               {this.pageHeader(tab)}
               <div className="container-fluid px-5 my-5">
                 <div className="row g-5">
-                  <div className="col-lg-9">
+                  <div className="col">
                     <TeamsContainer
                       text={tab.text}
                       fetchOptions={{ ...tab.fetchOptions, searchQuery }}
                     />
                   </div>
-                  <div className="col-lg-3">
+                  <div className="col-xxl-3">
                     <ActivitiesContainer />
                   </div>
                 </div>
