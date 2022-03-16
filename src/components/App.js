@@ -85,18 +85,25 @@ export class App extends Component {
           </p>
           <h4>Additional features</h4>
           <ul>
-            <li>Try favoriting a team (and then switch tabs)</li>
-            <li>Try searching a team in the search box</li>
             <li>
-              Try clicking on the profile avatar in the top right to open a
-              dropdown
+              Favoriting a team works (You may favorite a team then switch
+              between tabs. Resets on page refresh though)
             </li>
-            <li>Click on the other links on the left sidebar</li>
-            <li>Add pagination for team cards</li>
+            <li>Team Search box works to filter teams</li>
+            <li>
+              Clicking on the profile avatar in the top right to open a dropdown
+            </li>
+            <li>
+              Errorneous messages on invalid urls (Try clicking on the sidebar
+              links)
+            </li>
+            <li>Team Cards are paginated</li>
+            <li>Mobile responsive (Try resizing the browser size)</li>
           </ul>
           <h4>TODO</h4>
           <ul>
             <li>Add create new card feature</li>
+            <li>Add local storage for data persistance</li>
             <li>Enable open welcome message from profile avatar dropdown</li>
           </ul>
 
