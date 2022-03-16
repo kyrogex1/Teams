@@ -99,10 +99,10 @@ export class App extends Component {
             </li>
             <li>Team Cards are paginated</li>
             <li>Mobile responsive (Try resizing the browser size)</li>
+            <li>Allow the creation of new cards via the green button</li>
           </ul>
           <h4>TODO</h4>
           <ul>
-            <li>Add create new card feature</li>
             <li>Add local storage for data persistance</li>
             <li>Enable open welcome message from profile avatar dropdown</li>
           </ul>
