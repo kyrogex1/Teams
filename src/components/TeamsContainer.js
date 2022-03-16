@@ -140,7 +140,7 @@ export class TeamsContainer extends Component {
         .fill(1)
         .map((_, idx) => {
           return (
-            <div className="col-xl-4 col-lg-6" key={idx}>
+            <div className="col-xl-4 col-lg-6 d-flex flex-column" key={idx}>
               <TeamCard isLoading />
             </div>
           );
@@ -150,7 +150,7 @@ export class TeamsContainer extends Component {
     if (this.state.teamsToDisplay.length > 0) {
       return this.state.teamsToDisplay.map((team) => {
         return (
-          <div className="col-xl-4 col-lg-6" key={team.id}>
+          <div className="col-xl-4 col-lg-6 d-flex flex-column" key={team.id}>
             <TeamCard {...team} favoriteHandler={this.favoriteHandler} />
           </div>
         );

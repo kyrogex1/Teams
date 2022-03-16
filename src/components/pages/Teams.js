@@ -8,6 +8,8 @@ import DebouncedInput from "../DebouncedInput";
 import { ReactComponent as IconPlus } from "../../assets/svg/icon-plus.svg";
 import { ReactComponent as IconTeams } from "../../assets/svg/icon-teams.svg";
 import CustomSwitch from "../CustomSwitch";
+import { Link } from "react-router-dom";
+import CreateTeamPage from "./CreateTeamPage";
 
 export const teamTabs = [
   {
@@ -63,6 +65,8 @@ export class Teams extends Component {
 
   pageHeader = (tab) => {
     const selectedTab = tab;
+    const url = this.props.match?.url;
+    const createNewTeamUrl = url + "/create";
 
     return (
       <div className="bg-white pt-4 px-4 shadow-sm">
@@ -70,9 +74,12 @@ export class Teams extends Component {
           <h2 className="d-flex align-items-center">
             <IconTeams style={{ color: "#A4A6A8" }} className="me-3" /> Teams
           </h2>
-          <button className="btn btn-light-green d-flex align-items-center">
+          <Link
+            className="btn btn-light-green d-flex align-items-center"
+            to={createNewTeamUrl}
+          >
             <IconPlus className="me-2" /> CREATE NEW TEAM
-          </button>
+          </Link>
         </div>
         <div className="d-flex justify-content-between align-items-center">
           <div>
@@ -89,7 +96,6 @@ export class Teams extends Component {
 
     const queryParams = queryString.parse(this.props.location.search);
     const searchQuery = queryParams.query ?? "";
-    const fetchOptions = {};
 
     return (
       <CustomSwitch>
@@ -117,6 +123,9 @@ export class Teams extends Component {
             </Route>
           );
         })}
+        <Route path={`${path}/create`}>
+          <CreateTeamPage />
+        </Route>
       </CustomSwitch>
     );
   }

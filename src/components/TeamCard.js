@@ -5,6 +5,7 @@ import iconConversations from "../assets/svg/icon-conversations-small.svg";
 import iconLeads from "../assets/svg/icon-leads-small.svg";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { avatarIcon } from "../util/api";
 
 const loadingPlaceHolder = (
   <div className="card p-3">
@@ -39,7 +40,7 @@ export class TeamCard extends Component {
 
     return (
       <div
-        className={`card my-3 ${
+        className={`card my-3 flex-grow-1 ${
           this.props.is_archived ? "team-card archived" : ""
         }`}
       >
@@ -49,7 +50,9 @@ export class TeamCard extends Component {
             <img
               className="rounded me-3"
               height="45px"
-              src={this.props.image}
+              width="45px"
+              src={this.props.image ?? avatarIcon}
+              alt={this.props.name ?? "Unknown"}
             />
             <div className="d-flex justify-content-between align-items-start flex-grow-1">
               <div>
