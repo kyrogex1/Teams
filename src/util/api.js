@@ -2,7 +2,7 @@ import data from "./data.json";
 import { isNullOrUndefined } from "./utils";
 
 // Function to simulate network delay
-function sleep(ms = 200) {
+function sleep(ms = 1000) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
