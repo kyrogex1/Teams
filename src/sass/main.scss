@@ -144,45 +144,35 @@ $font-family-sans-serif: Nunito, sans-serif;
 
 // Dialog box
 .modal-dialog-box {
-  position: fixed;
-  padding: 50px;
+  max-height: 500px;
+  max-width: 400px;
   background-color: white;
 }
 
 .cssT-modal-dialog-box-enter {
   opacity: 0.3;
-  top: 0;
-  right: 0;
-  transform: translate(50%, -50%) scale(0.1);
+  transform: translate(0%, -25%);
 }
 
 .cssT-modal-dialog-box-enter-active {
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%) scale(1);
+  transform: translate(0%, 0%);
   opacity: 1;
   transition: all 0.3s;
 }
 
 .cssT-modal-dialog-box-enter-done {
   opacity: 1;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%) scale(1);
+  transform: translate(0%, 0%);
 }
 
 .cssT-modal-dialog-box-exit {
   opacity: 1;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%) scale(1);
+  transform: translate(0%, 0%);
 }
 
 .cssT-modal-dialog-box-exit-active {
   opacity: 0.3;
-  top: 0;
-  right: 0;
-  transform: translate(50%, -50%) scale(0.1);
+  transform: translate(0%, -25%);
   transition: all 0.3s;
 }
 

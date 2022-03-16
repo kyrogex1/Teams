@@ -14,7 +14,9 @@ export default function Modal({ open, children, onClose }) {
   return ReactDom.createPortal(
     <CSSTransition in={open} timeout={300} classNames="cssT-modal-overlay">
       <div
-        className={`modal-overlay ${showContent ? "" : "d-none"}`}
+        className={`modal-overlay d-flex justify-content-center align-items-center ${
+          showContent ? "" : "d-none"
+        }`}
         onClick={onClose}
       >
         <CSSTransition
@@ -24,7 +26,7 @@ export default function Modal({ open, children, onClose }) {
           onExited={() => setShowContent(false)}
         >
           <div
-            className="modal-dialog-box overflow-auto"
+            className="bg-white p-4 overflow-auto"
             onClick={(e) => e?.stopPropagation()}
           >
             {/* Close button on the top right */}
