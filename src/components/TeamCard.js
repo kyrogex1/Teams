@@ -46,7 +46,8 @@ export class TeamCard extends Component {
       >
         <div className="card-body">
           {/* Card header */}
-          <div className="d-flex align-items-center mb-3">
+          <div className="d-flex align-items-start mb-3">
+            {/* Team Image */}
             <img
               className="rounded me-3"
               height="45px"
@@ -54,40 +55,37 @@ export class TeamCard extends Component {
               src={this.props.image ?? avatarIcon}
               alt={this.props.name ?? "Unknown"}
             />
-            <div className="d-flex justify-content-between align-items-start flex-grow-1">
-              <div>
-                <p className="card-text mb-0">
-                  <strong>{this.props.name}</strong>
-                </p>
-                <p className="card-text">
-                  <small className="text-muted card-date-truncate">
-                    {this.props.created_at
-                      ? `Created ${this.props.created_at}`
-                      : "\u00A0"}
-                  </small>
-                </p>
-              </div>
-              {this.state.isPendingFavorite ? (
-                <button className="btn p-0" disabled>
-                  <div
-                    className="spinner-border spinner-border-sm"
-                    role="status"
-                  >
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                </button>
-              ) : (
-                <button className="btn p-0" onClick={this.favoriteHandler}>
-                  <img
-                    src={
-                      this.props.is_favorited
-                        ? iconFavoriteActive
-                        : iconFavoriteInactive
-                    }
-                  />
-                </button>
-              )}
+            {/* Team Name */}
+            <div className="flex-grow-1">
+              <p className="card-text mb-0">
+                <strong>{this.props.name}</strong>
+              </p>
+              <p className="card-text">
+                <small className="text-muted card-date-truncate">
+                  {this.props.created_at
+                    ? `Created ${this.props.created_at}`
+                    : "\u00A0"}
+                </small>
+              </p>
             </div>
+            {/* Favorite Icon */}
+            {this.state.isPendingFavorite ? (
+              <button className="btn p-0" disabled>
+                <div className="spinner-border spinner-border-sm" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </button>
+            ) : (
+              <button className="btn p-0" onClick={this.favoriteHandler}>
+                <img
+                  src={
+                    this.props.is_favorited
+                      ? iconFavoriteActive
+                      : iconFavoriteInactive
+                  }
+                />
+              </button>
+            )}
           </div>
 
           {/* Card Body */}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { addTeam } from "../../util/api";
+import { generateRandomNumber } from "../../util/utils";
 import TeamCard from "../TeamCard";
 
 export class CreateTeamPage extends Component {
@@ -34,7 +35,7 @@ export class CreateTeamPage extends Component {
   };
 
   onSubmit = async (e) => {
-    await addTeam({ ...this.state });
+    await addTeam({ ...this.state, id: generateRandomNumber() });
     alert(
       "Your Team has been saved, you may view your new team in the Teams Page"
     );
