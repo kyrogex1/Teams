@@ -57,6 +57,22 @@ export class Teams extends Component {
     });
   };
 
+  tabItem = (text, isSelected, pathLink, key) => {
+    return (
+      <Link
+        to={pathLink}
+        className={
+          "text-decoration-none " + (isSelected ? "text-primary" : "text-dark")
+        }
+        key={key}
+      >
+        <div className="p-3">
+          <strong>{text}</strong>
+        </div>
+      </Link>
+    );
+  };
+
   componentDidUpdate() {
     const queryParams = queryString.parse(this.props.location.search);
     const searchQuery = queryParams.query ?? "";
@@ -67,6 +83,10 @@ export class Teams extends Component {
     const selectedTab = tab;
     const url = this.props.match?.url;
     const createNewTeamUrl = url + "/create";
+
+    const tabItems = teamTabs.map((tab, index) => {
+      return this.tabItem(tab.text, tab === selectedTab, tab.pathLink, index);
+    });
 
     return (
       <div className="bg-white pt-4 px-4 shadow-sm">
@@ -83,7 +103,10 @@ export class Teams extends Component {
         </div>
         <div className="d-flex justify-content-between align-items-center">
           <div>
-            <Tabs tabs={teamTabs} selected={selectedTab} />
+            <Tabs
+              tabs={tabItems}
+              selectedIndex={teamTabs.indexOf(selectedTab)}
+            />
           </div>
           <DebouncedInput ref={this.inputRef} onChange={this.onSearchChange} />
         </div>
