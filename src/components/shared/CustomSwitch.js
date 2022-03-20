@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
-import Page404 from "./pages/Page404";
+import Page404 from "../pages/Page404";
 
 export class CustomSwitch extends Component {
   render() {

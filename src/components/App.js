@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import Header from "./Header";
-import Teams from "./pages/Teams";
+import Header from "./header/Header";
+import Teams from "./pages/Teams/Teams";
 import Sidebar from "./Sidebar";
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import { fetchCurrentUser } from "../util/api";
-import CustomSwitch from "./CustomSwitch";
+import CustomSwitch from "./shared/CustomSwitch";
 import "../sass/main.scss";
-import Modal from "./Modal";
+import Modal from "./shared/Modal";
 
 const GIT_REPO_URL = "https://github.com/kyrogex1/Teams";
 

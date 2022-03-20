@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import iconFavoriteActive from "../assets/svg/icon-favorite-active.svg";
-import iconFavoriteInactive from "../assets/svg/icon-favorite-inactive.svg";
-import iconConversations from "../assets/svg/icon-conversations-small.svg";
-import iconLeads from "../assets/svg/icon-leads-small.svg";
+import iconFavoriteActive from "../../../assets/svg/icon-favorite-active.svg";
+import iconFavoriteInactive from "../../../assets/svg/icon-favorite-inactive.svg";
+import iconConversations from "../../../assets/svg/icon-conversations-small.svg";
+import iconLeads from "../../../assets/svg/icon-leads-small.svg";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { avatarIcon } from "../util/api";
+import { avatarIcon } from "../../../util/api";
 
 const loadingPlaceHolder = (
   <div className="card p-3">

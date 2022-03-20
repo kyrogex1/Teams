@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import iconSearch from "../assets/svg/icon-search.svg";
+import iconSearch from "../../assets/svg/icon-search.svg";
 
 export class DebouncedInput extends Component {
   constructor(props) {

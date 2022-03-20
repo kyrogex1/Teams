@@ -5,12 +5,12 @@ import {
   fetchNumberMatchedTeams,
   unfavoriteTeam,
   fetchTeams,
-} from "../util/api";
+} from "../../../util/api";
 import queryString from "query-string";
 import TeamCard from "./TeamCard";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import Pagination from "./Pagination";
+import Pagination from "../../shared/Pagination";
 import { withRouter } from "react-router-dom";
 
 export class TeamsContainer extends Component {

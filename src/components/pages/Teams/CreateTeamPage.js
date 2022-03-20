@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { addTeam } from "../../util/api";
-import { generateRandomNumber } from "../../util/utils";
-import TeamCard from "../TeamCard";
+import { addTeam } from "../../../util/api";
+import { generateRandomNumber } from "../../../util/utils";
+import TeamCard from "./TeamCard";
 
 export class CreateTeamPage extends Component {
   constructor(props) {

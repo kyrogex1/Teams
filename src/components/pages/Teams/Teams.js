@@ -1,13 +1,13 @@
 import React, { Component, createRef } from "react";
-import ActivitiesContainer from "../ActivitiesContainer";
+import ActivitiesContainer from "../../ActivitiesContainer";
 import { Redirect, Route, withRouter } from "react-router-dom";
 import queryString from "query-string";
-import Tabs from "../Tabs";
-import TeamsContainer from "../TeamsContainer";
-import DebouncedInput from "../DebouncedInput";
-import { ReactComponent as IconPlus } from "../../assets/svg/icon-plus.svg";
-import { ReactComponent as IconTeams } from "../../assets/svg/icon-teams.svg";
-import CustomSwitch from "../CustomSwitch";
+import Tabs from "../../shared/Tabs";
+import TeamsContainer from "./TeamsContainer";
+import DebouncedInput from "../../shared/DebouncedInput";
+import { ReactComponent as IconPlus } from "../../../assets/svg/icon-plus.svg";
+import { ReactComponent as IconTeams } from "../../../assets/svg/icon-teams.svg";
+import CustomSwitch from "../../shared/CustomSwitch";
 import { Link } from "react-router-dom";
 import CreateTeamPage from "./CreateTeamPage";
 

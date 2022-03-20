@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import iconMail from "../assets/svg/icon-mail.svg";
-import AuthContext from "../context/AuthContext";
+import iconMail from "../../assets/svg/icon-mail.svg";
+import AuthContext from "../../context/AuthContext";
 
 export class HeaderNotifications extends Component {
   render() {

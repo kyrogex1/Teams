@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import AuthContext from "../context/AuthContext";
-import Dropdown from "./Dropdown";
+import AuthContext from "../../context/AuthContext";
+import Dropdown from "../shared/Dropdown";
 
 export class HeaderAvatar extends Component {
   render() {
