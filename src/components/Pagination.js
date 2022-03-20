@@ -50,11 +50,11 @@ const Pagination = (props) => {
         <span className="page-link">&laquo;</span>
       </li>
 
-      {paginationRange.map((pageNumber) => {
+      {paginationRange.map((pageNumber, index) => {
         // If the pageItem is a DOT, render the DOTS unicode character
         if (pageNumber === DOTS) {
           return (
-            <li className="page-item dots">
+            <li className="page-item dots" key={index}>
               <span className="page-link">&#8230;</span>
             </li>
           );
@@ -66,6 +66,7 @@ const Pagination = (props) => {
             className={`page-item ${
               parseInt(pageNumber) === currentPage ? "active" : ""
             }`}
+            key={index}
             onClick={() => onPageChange(pageNumber)}
           >
             <span className="page-link">{pageNumber}</span>
