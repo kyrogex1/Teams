@@ -86,10 +86,14 @@ export class App extends Component {
           <h4>Additional features</h4>
           <ul>
             <li>
-              Favoriting a team works (You may favorite a team then switch
-              between tabs. Resets on page refresh though)
+              Favoriting a team works (You may favorite / unfavorite a team then
+              switch to the favorite tab to see changes. Resets on page refresh
+              though)
             </li>
-            <li>Team Search box works to filter teams</li>
+            <li>
+              Team Search box works to filter teams. Debounced is also
+              incoporated to reduce number of network calls
+            </li>
             <li>
               Clicking on the profile avatar in the top right to open a dropdown
             </li>
